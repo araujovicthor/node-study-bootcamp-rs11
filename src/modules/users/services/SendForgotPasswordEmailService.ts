@@ -2,8 +2,6 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '@shared/errors/AppError';
 
-// import User from '@modules/users/infra/typeorm/entities/User';
-
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';

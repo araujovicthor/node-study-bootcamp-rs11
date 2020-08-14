@@ -31,7 +31,7 @@ describe('UpdateUserAvatar', () => {
       avatarFilename: 'avatar.jpeg',
     });
 
-    expect(response.avatar).toBe('avatar.jpeg');
+    await expect(response.avatar).toBe('avatar.jpeg');
   });
 
   it('should not be able to update avatar for a non existing user', async () => {
@@ -62,7 +62,7 @@ describe('UpdateUserAvatar', () => {
       avatarFilename: 'avatar2.jpeg',
     });
 
-    expect(deleteFile).toHaveBeenCalledWith('avatar.jpeg');
-    expect(response.avatar).toBe('avatar2.jpeg');
+    await expect(deleteFile).toHaveBeenCalledWith('avatar.jpeg');
+    await expect(response.avatar).toBe('avatar2.jpeg');
   });
 });

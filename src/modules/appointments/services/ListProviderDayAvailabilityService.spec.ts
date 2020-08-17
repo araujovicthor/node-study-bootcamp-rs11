@@ -1,26 +1,28 @@
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
-import ListProviderDayAvailability from './ListProviderDayAvailability';
+import ListProviderDayAvailabilityService from './ListProviderDayAvailabilityService';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
-let listProviderDayAvailability: ListProviderDayAvailability;
+let listProviderDayAvailability: ListProviderDayAvailabilityService;
 
 describe('ListProviderDayAvailability', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    listProviderDayAvailability = new ListProviderDayAvailability(
+    listProviderDayAvailability = new ListProviderDayAvailabilityService(
       fakeAppointmentsRepository,
     );
   });
 
   it('should be able to list the day availability for provider', async () => {
     await fakeAppointmentsRepository.create({
-      provider_id: 'user',
+      provider_id: 'provider_id',
       date: new Date(2020, 7, 20, 13, 0, 0),
+      user_id: 'user_id',
     });
 
     await fakeAppointmentsRepository.create({
-      provider_id: 'user',
+      provider_id: 'provider_id',
       date: new Date(2020, 7, 20, 15, 0, 0),
+      user_id: 'user_id',
     });
 
     jest
@@ -28,7 +30,7 @@ describe('ListProviderDayAvailability', () => {
       .mockImplementationOnce(() => new Date(2020, 7, 20, 10).getTime());
 
     const availability = await listProviderDayAvailability.execute({
-      provider_id: 'user',
+      provider_id: 'provider_id',
       day: 20,
       year: 2020,
       month: 8,

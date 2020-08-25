@@ -3,7 +3,7 @@ import cacheConfig from '@config/cache';
 
 import ICacheProvider from '../models/ICacheProvider';
 
-export default class RedisClassProvider implements ICacheProvider {
+export default class RedisCacheProvider implements ICacheProvider {
   private client: RedisClient;
 
   constructor() {
@@ -25,7 +25,7 @@ export default class RedisClassProvider implements ICacheProvider {
   }
 
   public async invalidate(key: string): Promise<void> {
-    await this.client.get(key);
+    await this.client.del(key);
   }
 
   public async invalidatePrefix(prefix: string): Promise<void> {

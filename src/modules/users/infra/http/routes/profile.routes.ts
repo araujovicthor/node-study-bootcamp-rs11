@@ -22,7 +22,12 @@ profileRouter.put(
         is: Joi.exist(),
         then: Joi.required(),
       }),
-      password_confirmation: Joi.string().required().valid(Joi.ref('password')),
+      password_confirmation: Joi.string()
+        .when('password', {
+          is: Joi.exist(),
+          then: Joi.required(),
+        })
+        .valid(Joi.ref('password')),
     },
   }),
   usersProfileController.update,
